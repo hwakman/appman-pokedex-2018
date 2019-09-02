@@ -80,10 +80,12 @@ export default class App extends Component {
           <button onClick={this.openList} className="btn btn-danger">ADD</button>
         </nav>
         <div className="container-fulid">
+        <h3>My Pokemon's Dex</h3>
+        <div className="row">
         {this.state.MyCard.map((res,index) => 
-        <div key={index} className="row">
-          <img className="col-6" src={res.imageUrl} />
-          <div className="col-6">
+          <React.Fragment>
+          <img key={index} className="col-3" src={res.imageUrl} />
+          <div className="col-3">
             <h4>id: {res.name}</h4>
             <p>Type: {res.type}</p>
             <p>HP: {res.hp}</p>
@@ -92,7 +94,9 @@ export default class App extends Component {
             <button onClick={this.cardDetail.bind(this,res)} className="btn btn-primary">Details</button>
             <button onClick={this.returnCard.bind(this,res,index)} className="btn btn-danger">Remove</button>
           </div>
-        </div>)}
+          </React.Fragment>
+        )}
+        </div>
         </div>
         {this.state.showList ?  <CardList CardList={this.state.CardList} addCard={this.addToDex} removeDex={this.removeDex}/>:null}
         {this.state.showDetail ? <CardDetail detail={this.state.cardDetails} closeBut={this.closeDetail} />:null }
@@ -112,11 +116,12 @@ class CardList extends Component {
   }
   render() {
     return (
-      <div style={{height:"650px",width:"100%",position:"absolute",top:"0",zIndex:"1",overflowY:"scroll",backgroundColor:"#333",color:"white"}}>
+      <div style={{height:"650px",width:"100%",position:"absolute",top:"0",zIndex:"1",overflowX:"hidden",overflowY:"scroll",backgroundColor:"#333",color:"white"}}>
+        <div  className="row">
         {this.props.CardList.map((res,index) => 
-        <div key={index} className="row">
-          <img className="col-6" src={res.imageUrl} />
-          <div className="col-6">
+          <React.Fragment>
+          <img key={index} className="col-3" src={res.imageUrl} />
+          <div className="col-3">
             <h4>id: {res.name}</h4>
             <p>Type: {res.type}</p>
             <p>HP: {res.hp}</p>
@@ -124,7 +129,9 @@ class CardList extends Component {
             <p>Series: {res.series}</p>
             <button onClick={this.addToDex.bind(this,res,index)} className="btn btn-danger">Add</button>
           </div>
-        </div>)}
+          </React.Fragment>
+        )}
+        </div>
       </div>
     )
   }
